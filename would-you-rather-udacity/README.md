@@ -1,7 +1,7 @@
 # Would You Rather Project
 
 This `React` project is a game that allows players to ask questions to all players, other players can only choose an answer which they prefer most between two given options. All the answers and questions are recorded and store in temporary database. 
-The app use `Redux` to manage state, because the app's state is intricate and complicated
+The app use `Redux` to manage state, because the app's state is intricate and complicated.
 Additional library used: `react-router-dom`, `react-redux-loading`
 
 
