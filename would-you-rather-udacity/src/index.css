@@ -1,0 +1,44 @@
+.login-form {
+    height: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #636e72;
+    margin: 10px;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+}
+.big-avatar {
+    max-width: 100px;
+    min-height: 100px;
+    border-radius: 50%;
+    border: none;
+    
+}
+.poll{
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+.score {
+    width: 80px;
+    height: 80px;
+    background-color: #f6e58d;
+    color: honeydew;
+    font-size: 50px;
+}
+.main-container {
+    max-width: 1000px;
+    margin:  auto;
+    padding: 10px;
+  }
