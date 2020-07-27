@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { login } from '../actions/authedUser'
-import {withRouter} from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+
 class Login extends Component {
 
     handleLogin = (e)=>{
         e.preventDefault()
         const id = e.currentTarget.value
-        console.log(id)
         this.props.dispatch(login(id))
-        this.props.history.push('/')
     }
 
     render() { 
-        const { users } = this.props
+        const { users, location, authedUser } = this.props
+        if(authedUser !== null) {
+            const {from} = location.state || {from : {pathname : '/'}}
+            return (
+                <Redirect to={from}/>
+            )
+        }
+
         return ( 
             <div className='container mt-5'>
                 <div className='row justify-content-md-center'>
@@ -38,12 +44,13 @@ class Login extends Component {
         );
     }
 }
-const mapStateToProps = ({users}) => ({
+const mapStateToProps = ({users, authedUser}) => ({
     users: Object.keys(users).map( id => ({
         id,
         avatar: users[id].avatarURL,
         name: users[id].name
-    }))
+    })),
+    authedUser
 })
  
-export default withRouter(connect(mapStateToProps)(Login));
+export default connect(mapStateToProps)(Login);

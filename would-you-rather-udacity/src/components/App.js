@@ -10,6 +10,18 @@ import { BrowserRouter, Route, Redirect} from 'react-router-dom'
 import NavBar from './NavBar'
 import LoadingBar from 'react-redux-loading'
 
+
+const PrivateRoute = ({component: Component , user, ...rest}) => (
+  <Route {...rest} render={(props)=> (
+    user !== null
+      ? <Component {...props}/> 
+      : <Redirect to={{
+        pathname:'/login',
+        state: { from : {...props.location}}
+      }}/>
+  )} />
+)
+
 class App extends Component {
 
   componentDidMount(){
@@ -17,19 +29,20 @@ class App extends Component {
   }
 
   render() { 
+    const { authedUser, loading } = this.props
     return (
       <>
       <BrowserRouter>
-        <LoadingBar/>
+        <LoadingBar style={{zIndex:2}}/>
         <div className='main-container'>
           <NavBar/>
-          {this.props.loading === true? null : (
-            this.props.authedUser === null ? <Login/> :
+          {loading === true? null : (
             <div>
-              <Route exact path='/' component={Dashboard}/>
-              <Route path='/question/:id' component={QuestionDetail}/>
-              <Route path='/leaderboard' component={LeaderBoard}/>
-              <Route path='/add' component={NewQuestion}/>
+              <PrivateRoute exact path='/' component={Dashboard} user={authedUser}/>
+              <PrivateRoute path='/question/:id' component={QuestionDetail} user={authedUser}/>
+              <PrivateRoute path='/leaderboard' component={LeaderBoard} user={authedUser}/>
+              <PrivateRoute path='/add' component={NewQuestion} user={authedUser}/>
+              <Route path='/login' component={Login} />
             </div>
           )
           }

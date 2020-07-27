@@ -38,7 +38,5 @@
     font-size: 50px;
 }
 .main-container {
-    max-width: 1000px;
-    margin:  auto;
-    padding: 10px;
-  }
+    z-index: 1
+}
